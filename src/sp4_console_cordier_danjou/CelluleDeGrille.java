@@ -38,7 +38,7 @@ public class CelluleDeGrille {
         if (jetonCourant==null){
             return "vide";
         } else{
-            return jetonCourant.couleur;
+            return jetonCourant.lireCouleur();
         }
         }
    
