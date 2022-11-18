@@ -22,12 +22,21 @@ public class PlateauDeJeu {
     
     public int ajouterJetonDansColonne (Jeton jeton, int j){ 
         for (int i = 0; i < 6; i ++){ /*parcours les 6 lignes*/
-            if (grille[i][j].presenceJeton() == false) {
-                
+            if (grille[i][j].presenceJeton() == false) { /*s'il y a déjà un jeton, on n'en affecte pas un autre, on sort de la boucle et fait i+1*/
+                grille[i][j].affecterJeton(jeton);
+                return i;
             }
-            
-            
         }
-        
+        return -1; /*retourne -1 si la colonne est pleine*/
+    }
+    
+    public boolean grilleRemplie(){
+        for (int j = 0; j < 7; j ++) { /*parcourt chaque colonne pour voir si la dernière ligne est remplie ou non*/
+            if (grille[5][j].presenceJeton() == false){ /*signifie que la grille n'est pas remplie*/
+                return false;
+            }
+        }
+        return true;
     }
 }
+
