@@ -9,9 +9,9 @@ package sp4_console_cordier_danjou;
  * @author Nina
  */
 public class Jeton {
-    String couleur; /*ajout de l'attribut couleur associé au jeton*/
+    private String couleur; /*ajout de l'attribut couleur associé au jeton*/
     
-    private Jeton (String une_couleur) { /*creation d'un constructeur, il initialise
+    public Jeton (String une_couleur) { /*creation d'un constructeur, il initialise
         l'attribut couleur du jeton avec la valeur passée en paramètre*/
         couleur = une_couleur;
     }
