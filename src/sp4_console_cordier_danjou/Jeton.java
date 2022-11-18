@@ -16,7 +16,7 @@ public class Jeton {
         couleur = une_couleur;
     }
     
-    private String lireCouleur() {
+    public String lireCouleur() {
         return couleur;
     }
     
