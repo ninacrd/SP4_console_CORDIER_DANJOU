@@ -11,7 +11,7 @@ package sp4_console_cordier_danjou;
 public class CelluleDeGrille {
 
     /*creation d'une nouvelle classe*/
-    private Jeton jetonCourant;
+    Jeton jetonCourant;
     private boolean avoirTrouNoir;
     private boolean avoirDesintegrateur;
     

@@ -119,6 +119,20 @@ public class PlateauDeJeu {
         return false;
     }
     
+    public void tasserColonne(int j){
+        for (int i=0; i<6; i++){
+            if (i==5){ /*derniere ligne*/
+                grille[i][j].jetonCourant=null; /*si on a supprimé le jeton sur la derniere ligne, peut importe la colonne alors cette cellule sera nulle*/
+            } else {
+                if (grille[i][j].jetonCourant == null){ /*cellule où on a capturé ou détruit le jeton*/
+                    grille[i][j].jetonCourant = grille[i+1][j].jetonCourant; /*décale les jetons du haut vers le bas*/
+                    grille[i+1][j].jetonCourant=null; /*le jeton ayant été décale, 
+                    son ancienne cellule sera vide sauf si un jeton était présent encore au dessus*/
+                }
+            }
+        }
+    }
+    
     public boolean colonneRemplie(int j){
         if (grille[5][j].presenceJeton()==false){ /*permet de savoir si une colonne est remplie si a la derniere ligne on a un jeton*/
                 return false;
