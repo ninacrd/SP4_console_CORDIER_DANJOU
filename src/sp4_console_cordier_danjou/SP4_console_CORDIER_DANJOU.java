@@ -17,6 +17,8 @@ public class SP4_console_CORDIER_DANJOU {
         // TODO code application logic here
         Jeton jeton1 = new Jeton ("jaune");
         System.out.println(jeton1);
+        
+        CelluleDeGrille[][] grille = new CelluleDeGrille[6][7];
 
     }
     
