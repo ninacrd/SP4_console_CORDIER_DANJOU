@@ -108,7 +108,15 @@ public class PlateauDeJeu {
     }
     
     public boolean etreGagnantePourCouleur(String C){
+        boolean l = ligneGagnantePourCouleur(C);
+        boolean c = colonneGagnantePourCouleur(C);
+        boolean dm = diagonaleMontanteGagnantePourCouleur(C);
+        boolean dd = diagonaleDescendanteGagnantePourCouleur(C);
         
+        if (l == true || c == true ||dm == true || dd == true){
+            return true;
+        }
+        return false;
     }
 }
 
