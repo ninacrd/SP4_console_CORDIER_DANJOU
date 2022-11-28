@@ -12,22 +12,26 @@ public class CelluleDeGrille {
 
     /*creation d'une nouvelle classe*/
     private Jeton jetonCourant;
+    private boolean avoirTrouNoir;
+    private boolean avoirDesintegrateur;
+    
 
     public CelluleDeGrille() {/*initialisation de l'attribut*/
         jetonCourant = null;
+        avoirTrouNoir = false;
+        avoirDesintegrateur = false;
     }
 
     public boolean presenceJeton() {
         /*chercher la présence ou non de jeton grâce à la méthode boolean*/
         if (jetonCourant == null) {
-            return true;
-        } else {
             return false;
+        } else {
+            return true;
         }
     }
 
     public void affecterJeton(Jeton un_jeton) {/*on ajoute le jeton en parametre a la cellule*/
-
         jetonCourant = un_jeton;
     }
 
@@ -40,6 +44,22 @@ public class CelluleDeGrille {
         }
     }
 
+    public void placerTrouNoir(){
+        avoirTrouNoir = true;
+    }
+    
+    public void supprimerTrouNoir(){
+        avoirTrouNoir = false;
+    }
+    
+    public boolean presenceTrouNoir(){
+        if (avoirTrouNoir == true){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     public Jeton recupererJeton() {
         Jeton temp = jetonCourant;
         jetonCourant = null;
