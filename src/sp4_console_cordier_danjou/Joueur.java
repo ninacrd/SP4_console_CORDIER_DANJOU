@@ -31,13 +31,21 @@ public class Joueur {
         return taille;
     }
 
-    public void  ajouterJeton( Jeton ajout){
+    public void  ajouterJeton(Jeton ajout){
         reserveJetons.add(ajout);
     }
 
-    public Jeton joueurJeton(){
-        int m =nombreDeJetons();
+    public Jeton jouerJeton(){
+        int m = nombreDeJetons();
         Jeton jt = reserveJetons.remove(m);
         return jt;
+    }
+    
+    public void obtenirDesintegrateur(){
+        nombreDesintegrateurs += 1;
+    }
+    
+    public void utiliserDesintegrateur(){
+        nombreDesintegrateurs -= 1;
     }
 }
