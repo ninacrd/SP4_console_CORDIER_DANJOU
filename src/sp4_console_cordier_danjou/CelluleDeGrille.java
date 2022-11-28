@@ -11,23 +11,27 @@ package sp4_console_cordier_danjou;
 public class CelluleDeGrille {
 
     /*creation d'une nouvelle classe*/
-    private Jeton jetonCourant;
+    Jeton jetonCourant;
+    private boolean avoirTrouNoir;
+    private boolean avoirDesintegrateur;
+    
 
     public CelluleDeGrille() {/*initialisation de l'attribut*/
         jetonCourant = null;
+        avoirTrouNoir = false;
+        avoirDesintegrateur = false;
     }
 
     public boolean presenceJeton() {
         /*chercher la présence ou non de jeton grâce à la méthode boolean*/
         if (jetonCourant == null) {
-            return true;
-        } else {
             return false;
+        } else {
+            return true;
         }
     }
 
     public void affecterJeton(Jeton un_jeton) {/*on ajoute le jeton en parametre a la cellule*/
-
         jetonCourant = un_jeton;
     }
 
@@ -40,10 +44,51 @@ public class CelluleDeGrille {
         }
     }
 
+    public void placerTrouNoir(){
+        avoirTrouNoir = true;
+    }
+    
+    public void supprimerTrouNoir(){
+        avoirTrouNoir = false;
+    }
+    
+    public boolean presenceTrouNoir(){
+        if (avoirTrouNoir == true){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     public Jeton recupererJeton() {
-        Jeton temp = jetonCourant;
+        Jeton temp = jetonCourant; /*utilisation d'une variable temporaire*/
         jetonCourant = null;
         return (temp);
+    }
+    
+    public void supprimerJeton(){
+        jetonCourant = null;
+    }
+    
+    public boolean presenceDesintegrateur(){
+        if (avoirDesintegrateur == true){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public void placerDesintegrateur(){
+        avoirDesintegrateur = true;
+    }
+    
+    public void supprimerDesintegrateur(){
+        avoirDesintegrateur = false;
+    }
+    
+    public void activerTrouNoir(){
+        this.supprimerJeton();
+        this.supprimerTrouNoir();
     }
 
     
@@ -53,7 +98,7 @@ public class CelluleDeGrille {
         String chaine_a_retourner;
         
         chaine_a_retourner ="erreur";
-        if (jetonCourant==null){
+        if (jetonCourant==null && avoirTrouNoir == false && avoirDesintegrateur == false){
             chaine_a_retourner=".";
             
         }
@@ -64,10 +109,17 @@ public class CelluleDeGrille {
            chaine_a_retourner = "J";
         }
         
-            return chaine_a_retourner;
+        if (avoirTrouNoir == true){
+            chaine_a_retourner = "@";
         }
         
-    }
+        if (avoirDesintegrateur == true){
+            chaine_a_retourner = "D";
+        }
+        
+            return chaine_a_retourner;
+        }
+}      
     
     
     
