@@ -119,7 +119,7 @@ public class PlateauDeJeu {
         return false;
     }
     
-    public void tasserColonne(int j){
+    public void tasserColonne(int j){ /*avec j la colonne*/
         for (int i=0; i<6; i++){
             if (i==5){ /*derniere ligne*/
                 grille[i][j].jetonCourant=null; /*si on a supprimé le jeton sur la derniere ligne, peut importe la colonne alors cette cellule sera nulle*/
@@ -139,6 +139,27 @@ public class PlateauDeJeu {
             }else{
                 return true;
             }
+    }
+    
+    public void placerTrouNoir(int i, int j){
+        grille[i][j].placerTrouNoir();
+    }
+    
+    public void supprimerTrouNoir(int i, int j){
+        grille[i][j].supprimerTrouNoir();
+    }
+    
+    public void placerDesintegrateur(int i, int j){
+        grille[i][j].placerDesintegrateur();
+    }
+    
+    public void supprimerJeton(int i, int j){
+        grille[i][j].supprimerJeton();
+    }
+    
+    public Jeton recupererJeton(int i, int j){
+        Jeton recup = grille[i][j].recupererJeton();
+        return recup;
     }
 }
 
