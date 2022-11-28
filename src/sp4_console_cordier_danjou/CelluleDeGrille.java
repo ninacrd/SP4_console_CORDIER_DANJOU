@@ -61,9 +61,34 @@ public class CelluleDeGrille {
     }
     
     public Jeton recupererJeton() {
-        Jeton temp = jetonCourant;
+        Jeton temp = jetonCourant; /*utilisation d'une variable temporaire*/
         jetonCourant = null;
         return (temp);
+    }
+    
+    public void supprimerJeton(){
+        jetonCourant = null;
+    }
+    
+    public boolean presenceDesintegrateur(){
+        if (avoirDesintegrateur == true){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public void placerDesintegrateur(){
+        avoirDesintegrateur = true;
+    }
+    
+    public void supprimerDesintegrateur(){
+        avoirDesintegrateur = false;
+    }
+    
+    public void activerTrouNoir(){
+        this.supprimerJeton();
+        this.supprimerTrouNoir();
     }
 
     
@@ -73,7 +98,7 @@ public class CelluleDeGrille {
         String chaine_a_retourner;
         
         chaine_a_retourner ="erreur";
-        if (jetonCourant==null){
+        if (jetonCourant==null && avoirTrouNoir == false && avoirDesintegrateur == false){
             chaine_a_retourner=".";
             
         }
@@ -84,10 +109,17 @@ public class CelluleDeGrille {
            chaine_a_retourner = "J";
         }
         
-            return chaine_a_retourner;
+        if (avoirTrouNoir == true){
+            chaine_a_retourner = "@";
         }
         
-    }
+        if (avoirDesintegrateur == true){
+            chaine_a_retourner = "D";
+        }
+        
+            return chaine_a_retourner;
+        }
+}      
     
     
     
