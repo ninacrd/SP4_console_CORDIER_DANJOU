@@ -15,7 +15,7 @@ public class SP4_console_CORDIER_DANJOU {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Jeton jeton1 = new Jeton (jaune);
+        Jeton jeton1 = new Jeton ("jaune");
         System.out.println(jeton1);
 
     }
