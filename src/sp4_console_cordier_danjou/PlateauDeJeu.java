@@ -39,6 +39,14 @@ public class PlateauDeJeu {
         return true;
     }
     
+    public void viderGrille(Joueur joueur1, Joueur joueur2){ //vide les jetons de la grille
+        for (int i=0;i<6;i++){
+            for (int j=0;j<7;j++){
+                grille[i][j].jetonCourant=null; /*chaque cellule est vidée*/
+            }
+        }
+    }
+    
     public void afficherGrilleSurConsole(){ /*on affiche la grille sur la console*/
         for (int i=5;i>=0;i--){
             for (int j=0;j<7;j++){
