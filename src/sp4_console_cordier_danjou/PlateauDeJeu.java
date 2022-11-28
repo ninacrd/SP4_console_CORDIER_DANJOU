@@ -94,7 +94,20 @@ public class PlateauDeJeu {
         return false;
     }
     
-    public boolean diagonaleDesencanteGagnantePourCouleur(String C){
+    public boolean diagonaleDescendanteGagnantePourCouleur(String C){
+        int i;
+        int j;
+        for (i=3; i<6; i++){ 
+            for (j=0; i<4; i++){ /*l'indice de la colonne ne peut dépasser 3*/
+                if (C==grille[i][j].lireCouleurDuJeton() && C==grille[i][j+1].lireCouleurDuJeton() && C==grille[i][j+2].lireCouleurDuJeton() && C==grille[i][j+3].lireCouleurDuJeton()){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    public boolean etreGagnantePourCouleur(String C){
         
     }
 }
