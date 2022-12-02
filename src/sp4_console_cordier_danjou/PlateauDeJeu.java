@@ -149,9 +149,10 @@ public class PlateauDeJeu {
             }
     }
     
-    public void presenceTrouNoir(int i, int j){
-        grille[i][j].presenceTrouNoir();
-    }
+    public boolean presenceTrouNoir(int i, int j){
+        boolean m= grille[i][j].presenceTrouNoir();
+        return m;
+    } 
             
     public void placerTrouNoir(int i, int j){
         grille[i][j].placerTrouNoir();
@@ -169,8 +170,9 @@ public class PlateauDeJeu {
         grille[i][j].supprimerDesintegrateur();
     }
     
-    public void presenceDesintegrateur(int i, int j){
-        grille[i][j].presenceDesintegrateur();
+    public boolean presenceDesintegrateur(int i, int j){
+    boolean n=   grille[i][j].presenceDesintegrateur();
+    return n;
     }
     
     public void supprimerJeton(int i, int j){

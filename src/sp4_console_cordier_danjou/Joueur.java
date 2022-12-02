@@ -12,9 +12,10 @@ import java.util.ArrayList;
  */
 public class Joueur {
     private String nom;
-    private String couleur;
+    String couleur;
     private ArrayList <Jeton> reserveJetons;
     private int nombreDesintegrateurs;
+    
 
     public void Joueur (String un_nom){
         nom = un_nom;
