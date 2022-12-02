@@ -13,7 +13,7 @@ public class SP4_console_CORDIER_DANJOU {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void fmain(String[] args) {
         // TODO code application logic here
         Jeton jeton1 = new Jeton ("jaune");
         System.out.println(jeton1);
