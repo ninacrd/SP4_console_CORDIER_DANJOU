@@ -9,12 +9,24 @@ package sp4_console_cordier_danjou;
  * @author Nina
  */
 public class fenetreDeJeu extends javax.swing.JFrame {
-
+    private Joueur[] listeJoueurs = new Joueur[2];
+    private Joueur joueurCourant;
+    private PlateauDeJeu plateau;
     /**
      * Creates new form fenetreDeJeu
      */
     public fenetreDeJeu() {
         initComponents();
+        panneau_info_joueurs.setVisible(false);
+        panneau_info_partie.setVisible(false);
+        
+        for (int i = 5; i >= 0; i--){
+            for (int j = 0; j<7; j++){
+                CelluleGraphique cellGraph = new CelluleGraphique();
+                panneau_grille.add(cellGraph);
+            }
+        }
+
     }
 
     /**
@@ -93,6 +105,11 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         panneau_creation_partie.add(nom_joueur1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 150, -1));
 
         btn_start.setText("Démarrer partie");
+        btn_start.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_startActionPerformed(evt);
+            }
+        });
         panneau_creation_partie.add(btn_start, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, -1, -1));
 
         getContentPane().add(panneau_creation_partie, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 30, 290, 160));
@@ -141,7 +158,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         lbl_j2_couleur.setText("couleurjoueur2");
         panneau_info_joueurs.add(lbl_j2_couleur, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 80, 30));
 
-        getContentPane().add(panneau_info_joueurs, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 210, 290, 250));
+        getContentPane().add(panneau_info_joueurs, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 200, 290, 250));
 
         panneau_info_partie.setBackground(new java.awt.Color(255, 153, 153));
         panneau_info_partie.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -162,7 +179,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
 
         panneau_info_partie.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 70, 260, -1));
 
-        getContentPane().add(panneau_info_partie, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 480, 290, 160));
+        getContentPane().add(panneau_info_partie, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 460, 290, 160));
 
         btn_col_5.setText("6");
         getContentPane().add(btn_col_5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, -1, -1));
@@ -196,6 +213,12 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     private void nom_joueur1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nom_joueur1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nom_joueur1ActionPerformed
+
+    private void btn_startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_startActionPerformed
+        // TODO add your handling code here:
+        panneau_info_joueurs.setVisible(true);
+        panneau_info_partie.setVisible(true);
+    }//GEN-LAST:event_btn_startActionPerformed
 
     /**
      * @param args the command line arguments

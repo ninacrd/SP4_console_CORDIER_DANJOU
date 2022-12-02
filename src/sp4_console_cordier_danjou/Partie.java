@@ -44,8 +44,8 @@ public class Partie {
         Random lgn= new Random();
         Random cln= new Random();
         for(int i=0; i<3;i++){
-            int Ligne = lgn.nextInt(0,6);
-            int Colonne= cln.nextInt(0,7);
+            int Ligne = lgn.nextInt(6);
+            int Colonne= cln.nextInt(7);
         if(plateau.presenceTrouNoir(Ligne,Colonne)==false&& plateau.presenceDesintegrateur(Ligne, Colonne) == false) {
          plateau.placerTrouNoir(Ligne, Colonne);
                 plateau.placerDesintegrateur(Ligne, Colonne);
@@ -57,9 +57,8 @@ public class Partie {
         }
      for (int j = 0; j < 2; j++) {
 
-            int Ligne = lgn.nextInt(0, 6);
-
-            int Colonne = cln.nextInt(0, 7);
+            int Ligne = lgn.nextInt(6);
+            int Colonne = cln.nextInt(7);
 
             if (plateau.presenceDesintegrateur(Ligne, Colonne) == false) {
 
@@ -74,9 +73,9 @@ public class Partie {
         }
     for (int r = 0; r< 2; r++) {
 
-            int Ligne = lgn.nextInt(0, 6);
+            int Ligne = lgn.nextInt(6);
 
-            int Colonne = cln.nextInt(0, 7);
+            int Colonne = cln.nextInt(7);
 
             if (plateau.presenceTrouNoir(Ligne, Colonne) == false && plateau.presenceDesintegrateur(Ligne, Colonne) == false) {
 
