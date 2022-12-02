@@ -149,6 +149,10 @@ public class PlateauDeJeu {
             }
     }
     
+    public void presenceTrouNoir(int i, int j){
+        grille[i][j].presenceTrouNoir();
+    }
+            
     public void placerTrouNoir(int i, int j){
         grille[i][j].placerTrouNoir();
     }
@@ -159,6 +163,14 @@ public class PlateauDeJeu {
     
     public void placerDesintegrateur(int i, int j){
         grille[i][j].placerDesintegrateur();
+    }
+    
+    public void supprimerDesintegrateur(int i, int j){
+        grille[i][j].supprimerDesintegrateur();
+    }
+    
+    public void presenceDesintegrateur(int i, int j){
+        grille[i][j].presenceDesintegrateur();
     }
     
     public void supprimerJeton(int i, int j){
