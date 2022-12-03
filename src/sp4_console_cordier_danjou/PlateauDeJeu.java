@@ -14,8 +14,8 @@ public class PlateauDeJeu {
     public PlateauDeJeu(){ /*creation du constructeur de la classe*/
         /* utilisation de 2 boucles imbriquées afin de stocker les 42 cellules vides dans la grille*/
         for (int i = 0; i < 6; i++) { /*on parcourt les 6 lignes avec i*/
-            for (int j = 0; i < 7; i ++) { /*on parcourt les 7 colonnes avec j*/
-                grille[i][j]=new CelluleDeGrille();
+            for (int j = 0; j < 7; j ++) { /*on parcourt les 7 colonnes avec j*/
+                grille[i][j] = new CelluleDeGrille();
             }  
         }
     }
