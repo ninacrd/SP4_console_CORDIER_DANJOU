@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @author Utilisateur
  */
 public class Joueur {
-    private String nom;
+    String nom;
     String couleur;
     private ArrayList <Jeton> reserveJetons;
     private int nombreDesintegrateurs;
@@ -24,7 +24,11 @@ public class Joueur {
     }
     
     public void affecterCouleur(String une_couleur){
-        couleur = une_couleur;
+        couleur = une_couleur ;
+    }
+    
+    public String affecterCouleur(){
+        return couleur;
     }
 
     public int nombreDeJetons (){

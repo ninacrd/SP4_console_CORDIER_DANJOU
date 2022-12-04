@@ -14,7 +14,6 @@ public class CelluleDeGrille {
     Jeton jetonCourant;
     private boolean avoirTrouNoir;
     private boolean avoirDesintegrateur;
-    
 
     public CelluleDeGrille() {/*initialisation de l'attribut*/
         jetonCourant = null;
@@ -90,7 +89,6 @@ public class CelluleDeGrille {
         this.supprimerJeton();
         this.supprimerTrouNoir();
     }
-
     
 @Override
         public String toString() { 

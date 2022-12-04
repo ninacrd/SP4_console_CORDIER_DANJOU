@@ -55,8 +55,9 @@ public class PlateauDeJeu {
         }
     }
     
-    public void presenceJeton(int x,int y){
-        grille[x][y].presenceJeton(); /*retourne la valeur de cette méthode aux coordonnées [x][y}*/
+    public boolean presenceJeton(int x,int y){
+        boolean a = grille[x][y].presenceJeton(); /*retourne la valeur de cette méthode aux coordonnées [x][y}*/
+        return a;
     }
     
     public void lireCouleurDuJeton(int x, int y){
