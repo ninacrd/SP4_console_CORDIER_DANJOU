@@ -5,6 +5,7 @@
 package sp4_console_cordier_danjou;
 
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  *
@@ -13,7 +14,7 @@ import java.util.Random;
 public class Partie {
 
     private Joueur[] listeJoueurs = new Joueur[2];
-    private Joueur joueurCourant;
+    private Joueur jc;
     private PlateauDeJeu plateau;
 
     public void Partie(Joueur J1, Joueur J2) {
@@ -58,6 +59,7 @@ public class Partie {
      for (int j = 0; j < 2; j++) {
 
             int Ligne = lgn.nextInt(6);
+
             int Colonne = cln.nextInt(7);
 
             if (plateau.presenceDesintegrateur(Ligne, Colonne) == false) {
@@ -97,7 +99,23 @@ public class Partie {
     }
 
     public void LancerPartie(){
-        
+    Scanner sc=new Scanner(System.in);
+    int nbTour=0 ;
+    boolean resultatpartie= false ;
+    while (resultatpartie==false){
+        if(nbTour%2==0){
+            jc=listeJoueurs[0];
+        }else jc=listeJoueurs[1];
+        Jeton un_jeton=new Jeton(jc.couleur);
+            if (jc.ajouterJetonDansColonne(un_jeton)==true){
+            
+            
+           
+         
+        }
+    }
+    
+            
         
     }
     
