@@ -23,6 +23,14 @@ public class Joueur {
         reserveJetons = null;
     }
     
+    public Joueur (String un_nom){
+        nom = un_nom;
+    }
+    
+    public String afficher_nom_gagnant(){
+        return nom;
+    }
+    
     public void affecterCouleur(String une_couleur){
         couleur = une_couleur ;
     }
