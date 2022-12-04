@@ -49,4 +49,8 @@ public class Joueur {
     public void utiliserDesintegrateur(){
         nombreDesintegrateurs -= 1;
     }
+
+    boolean ajouterJetonDansColonne(Jeton un_jeton) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
