@@ -22,6 +22,8 @@ public class Partie {
     public Partie(Joueur J1, Joueur J2) {
         listeJoueurs[0] = J1;
         listeJoueurs[1] = J2;
+        this.plateau = new PlateauDeJeu();
+
     }
 
     public void attribuerCouleurAuxJoueurs() {
@@ -105,7 +107,6 @@ public class Partie {
         plateau.viderGrille();
         int choix_joueur;
         int nombre_joué = 0;
-        String couleur_jeton = joueurCourant.affecterCouleur();
         
         /*création des joueurs*/
         Scanner saisie_joueur = new Scanner(System.in);
@@ -130,6 +131,8 @@ public class Partie {
             joueurCourant = listeJoueurs[1];
         }
         
+        String couleur_jeton = joueurCourant.affecterCouleur();
+
         /*on créé une méthode qui déterminera le joueur suivant*/
         while(true){
             if(nombre_joué % 2 == 0){/*si on en a joué 1 : on joue, ensuite on aura = 0 donc ce sera à l'autre et ainsi de suite*/

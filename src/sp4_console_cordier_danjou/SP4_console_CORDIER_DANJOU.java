@@ -13,17 +13,17 @@ public class SP4_console_CORDIER_DANJOU {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void fmain(String[] args) {
         // TODO code application logic here
         Joueur J1 = new Joueur("Nina");
         Joueur J2 = new Joueur("Matthieu");
         
-        Partie Partie = new Partie();   
+        Partie game = new Partie(J1,J2);   
 
-        Partie.initialiserPartie();
+        game.initialiserPartie();
 
-        Partie.grille_jeu.afficherGrilleSurConsole();
-        Partie.LancerPartie();
+        game.grille_jeu.afficherGrilleSurConsole();
+        game.LancerPartie();
 
     }
     
