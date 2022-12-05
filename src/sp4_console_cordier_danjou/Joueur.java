@@ -11,18 +11,20 @@ import java.util.ArrayList;
  * @author Utilisateur
  */
 public class Joueur {
-    String nom;
-    String couleur;
-    private ArrayList <Jeton> reserveJetons = new ArrayList<Jeton>();
+    public String nom;
+    public String couleur;
+    private ArrayList <Jeton> reserveJetons = new ArrayList();
     private int nombreDesintegrateurs;
     
 
     public void Joueur (String un_nom){
         nom = un_nom;
-        nombreDesintegrateurs = 0;
     }
     
     public Joueur (String un_nom){
+        nom = un_nom;
+    }    
+    public void affecterNom (String un_nom){
         nom = un_nom;
     }
     
@@ -66,9 +68,10 @@ public class Joueur {
         else {
             return false;
         }
-    }
+}
 
     public int getNombreDesintegrateurs() {
         return nombreDesintegrateurs;
     }
+    
 }
