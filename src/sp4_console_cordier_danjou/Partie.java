@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class Partie {
 
     private Joueur[] listeJoueurs = new Joueur[2];
-    private Joueur joueurCourant;
+    private Joueur jc;
     private PlateauDeJeu plateau;
     PlateauDeJeu grille_jeu = new PlateauDeJeu();
 
@@ -63,6 +63,7 @@ public class Partie {
      for (int j = 0; j < 2; j++) {
 
             int Ligne = lgn.nextInt(6);
+
             int Colonne = cln.nextInt(7);
 
             if (plateau.presenceDesintegrateur(Ligne, Colonne) == false) {
