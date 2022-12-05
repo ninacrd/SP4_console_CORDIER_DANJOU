@@ -19,7 +19,7 @@ public class Partie {
     private PlateauDeJeu plateau;
     PlateauDeJeu grille_jeu = new PlateauDeJeu();
 
-    public void Partie(Joueur J1, Joueur J2) {
+    public Partie(Joueur J1, Joueur J2) {
         listeJoueurs[0] = J1;
         listeJoueurs[1] = J2;
     }
@@ -142,38 +142,51 @@ public class Partie {
         while (victoire != true){ /*tant que personne n'a eu 4 jetons alignés on continu de jouer donc la boucle continue de s'exécuter*/
             System.out.println("C'est à " + joueurCourant.nom + " de jouer");
             
-            System.out.println("Que souhaitez vous faire ?\nPlacer un jeton ? 1\nRetirer un jeton ? 2\nUtiliser un désintégrateur ? 3");
-
+        /* création d'un menu avec plusieurs choix possible*/
+            System.out.println(joueurCourant.nom + ", que voulez vous faire?");
+            System.out.println("1 - jouer un jeton");
+            System.out.println("2 - Récupérer un jeton");
+            System.out.println("3 - Désintegration d'un jeton adverse");
+            System.out.println("Veuillez entrer le chiffre correspondant à l'action voulue :");
+            choix_joueur = saisie_joueur.nextInt();            
+            while (choix_joueur <= 0 || choix_joueur > 3) { /* si l'utilisateur se trompe et ne met pas un nombre entre 1 et 3*/
+                System.out.println("veuillez entrer un chiffre compris entre 1 - 3 correspondant a l'action voulue");
+                choix_joueur = saisie_joueur.nextInt(); 
+            }
             choix_joueur = saisie_joueur.nextInt();
             
-            if (choix_joueur == 1){ /*s'il choisi 1 il veut placer un jeton*/
-                if (joueurCourant.nombreDeJetons() == 0){/*on vérifie que le joueur possede assez de jetons pour jouer*/
-                    System.out.println("Vous n'avez plus de jeton donc vous ne pouvez pas jouer");
-                }
-                else {
-                    System.out.println("Où souhaitez vous jouer ?");
-                    int colonne = saisie_joueur.nextInt();
-                    Jeton jeton_joué = joueurCourant.jouerJeton();/*on crée le jeton qui va être joué et le retire de ceux que le joueur possède*/                
-                    boolean cr = plateau.colonneRemplie(colonne);/*on vérifie que la colonne n'est pas remplie*/
-                    if(cr == true){/*si la colonne est remplie on ne peut plus placer de pion*/
-                        System.out.println("Cette colonne est pleine, choisissez en une autre");
-                    } 
-                    else {/*cas où la colonne n'est pas remplie : on peut jouer*/
-                        plateau.ajouterJetonDansColonne(jeton_joué,colonne);
-                        for(int j=0; j<7 ; j++){/*s'il y a un trou noir, on le retire ainsi que le jeton*/
-                            boolean a = plateau.presenceTrouNoir(colonne,j);
-                            if(a==true){
-                                plateau.supprimerTrouNoir(colonne,j);
-                                plateau.supprimerJeton(colonne,j);
+            switch (choix_joueur){
+            
+                case 1 : {
+                    if (choix_joueur == 1){ /*s'il choisi 1 il veut placer un jeton*/
+                    if (joueurCourant.nombreDeJetons() == 0){/*on vérifie que le joueur possede assez de jetons pour jouer*/
+                        System.out.println("Vous n'avez plus de jeton donc vous ne pouvez pas jouer");
+                    }
+                    else {
+                        System.out.println("Où souhaitez vous jouer ?");
+                        int colonne = saisie_joueur.nextInt();
+                        Jeton jeton_joué = joueurCourant.jouerJeton();/*on crée le jeton qui va être joué et le retire de ceux que le joueur possède*/                
+                        boolean cr = plateau.colonneRemplie(colonne);/*on vérifie que la colonne n'est pas remplie*/
+                        if(cr == true){/*si la colonne est remplie on ne peut plus placer de pion*/
+                            System.out.println("Cette colonne est pleine, choisissez en une autre");
+                        } 
+                        else {/*cas où la colonne n'est pas remplie : on peut jouer*/
+                            plateau.ajouterJetonDansColonne(jeton_joué,colonne);
+                            for(int j=0; j<7 ; j++){/*s'il y a un trou noir, on le retire ainsi que le jeton*/
+                                boolean a = plateau.presenceTrouNoir(colonne,j);
+                                if(a==true){
+                                    plateau.supprimerTrouNoir(colonne,j);
+                                    plateau.supprimerJeton(colonne,j);
+                                }
                             }
                         }
                     }
+                    nombre_joué ++;
+                    victoire = plateau.etreGagnantePourCouleur(couleur_jeton);/*on regarde si le joueur a aligné 4 jetons*/
                 }
-                nombre_joué ++;
-                victoire = plateau.etreGagnantePourCouleur(couleur_jeton);/*on regarde si le joueur a aligné 4 jetons*/
-            }
-            
-        
+                }
+        break;
+        case 2 :  {
             if (choix_joueur == 2){/*s'il choisi 2 il veut retirer un jeton*/
                 System.out.println("Quelle est la colonne du jeton à retirer ?");
                 int colonne_jr = saisie_joueur.nextInt(); /*on demande la colonne du jeton à retirer*/
@@ -195,6 +208,9 @@ public class Partie {
                 nombre_joué ++;
                 victoire = plateau.etreGagnantePourCouleur(couleur_jeton);
             }
+        }
+        break;
+        case 3: {
         
         
             if(choix_joueur==3){
@@ -217,6 +233,10 @@ public class Partie {
         String Gagnant = joueurCourant.afficher_nom_gagnant();
         System.out.println(Gagnant +" a gagné");
     }
+    }  
+        break;
+
+        }
     }
 }
 
