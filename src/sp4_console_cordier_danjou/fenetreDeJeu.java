@@ -4,25 +4,33 @@
  */
 package sp4_console_cordier_danjou;
 
+import java.util.Random;
+import java.util.Scanner;
+
 /**
  *
  * @author Nina
  */
 public class fenetreDeJeu extends javax.swing.JFrame {
+
     private Joueur[] listeJoueurs = new Joueur[2];
     private Joueur joueurCourant;
-    PlateauDeJeu plateau = new PlateauDeJeu ();
+    PlateauDeJeu plateau = new PlateauDeJeu();
+
     /**
      * Creates new form fenetreDeJeu
      */
     public fenetreDeJeu() {
+
+        this.plateau = new PlateauDeJeu();
+
         initComponents();
         panneau_info_joueurs.setVisible(false);
         panneau_info_partie.setVisible(false);
-        
-        for (int i = 5; i >= 0; i--){
-            for (int j = 0; j<7; j++){
-                CelluleGraphique cellGraph = new CelluleGraphique (plateau.grille[i][j]);
+
+        for (int i = 5; i >= 0; i--) {
+            for (int j = 0; j < 7; j++) {
+                CelluleGraphique cellGraph = new CelluleGraphique(plateau.grille[i][j]);
                 panneau_grille.add(cellGraph);
             }
         }
@@ -253,61 +261,164 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         panneau_info_joueurs.setVisible(true);
         panneau_info_partie.setVisible(true);
         initialiserPartie();
+
         panneau_grille.repaint();
         btn_start.setEnabled(false);
     }//GEN-LAST:event_btn_startActionPerformed
 
+    public void attribuerCouleurAuxJoueurs() {
+        Random generateurAleat = new Random();
+        int couleur = generateurAleat.nextInt(1);
+        if (couleur == 1) {
+            listeJoueurs[0].affecterCouleur("rouge");
+            listeJoueurs[1].affecterCouleur("jaune");
+        } else {
+            listeJoueurs[1].affecterCouleur("rouge");
+            listeJoueurs[0].affecterCouleur("jaune");
+        }
+
+    }
+
+    public void creerEtAffecterJeton(Joueur jr) {
+        Jeton[] jetons = new Jeton[30];
+        for (int i = 0; i < 30; i++) {
+            jetons[i] = new Jeton(jr.couleur);
+            jr.ajouterJeton(jetons[i]);
+
+        }
+    }
+
+    public void placerTrousNoirsEtDesintegrateurs() {
+        Random lgn = new Random();
+        Random cln = new Random();
+        for (int i = 0; i < 3; i++) {
+            int Ligne = lgn.nextInt(6);
+            int Colonne = cln.nextInt(7);
+            if (plateau.presenceTrouNoir(Ligne, Colonne) == false && plateau.presenceDesintegrateur(Ligne, Colonne) == false) {
+                plateau.placerTrouNoir(Ligne, Colonne);
+                plateau.placerDesintegrateur(Ligne, Colonne);
+
+            } else {
+
+                i -= 1;
+            }
+        }
+        for (int j = 0; j < 2; j++) {
+
+            int Ligne = lgn.nextInt(6);
+            int Colonne = cln.nextInt(7);
+
+            if (plateau.presenceDesintegrateur(Ligne, Colonne) == false) {
+
+                plateau.placerDesintegrateur(Ligne, Colonne);
+
+            } else {
+
+                j -= 1;
+
+            }
+
+        }
+        for (int r = 0; r < 2; r++) {
+
+            int Ligne = lgn.nextInt(6);
+
+            int Colonne = cln.nextInt(7);
+
+            if (plateau.presenceTrouNoir(Ligne, Colonne) == false && plateau.presenceDesintegrateur(Ligne, Colonne) == false) {
+
+                plateau.placerTrouNoir(Ligne, Colonne);
+
+            } else {
+
+                r -= 1;
+
+            }
+
+        }
+    }
+
+    public void initialiserPartie() {
+
+        listeJoueurs[0] = new Joueur("");
+        listeJoueurs[1] = new Joueur("");
+        String nomJoueur1 = nom_joueur1.getText();
+        Joueur J1 = new Joueur(nomJoueur1);
+        String nomJoueur2 = nom_joueur2.getText();
+        Joueur J2 = new Joueur(nomJoueur2);
+        attribuerCouleurAuxJoueurs();
+        System.out.println(J1.nom+"est de couleur"+J1.couleur);
+        System.out.println(J2.nom+"est de couleur"+J2.couleur);
+        creerEtAffecterJeton(listeJoueurs[0]);
+        creerEtAffecterJeton(listeJoueurs[1]);
+        this.placerTrousNoirsEtDesintegrateurs();
+        lbl_j1_nom.setText(nomJoueur1);
+        lbl_j2_nom.setText(nomJoueur2);
+        lbl_j1_couleur.setText(J1.couleur);
+        lbl_j2_couleur.setText(J2.couleur);
+        lbl_jcourant.setText(joueurCourant.nom);
+        lbl_j1_desint.setText(J1.nombreDesintegrateurs+"");
+        lbl_j2_desint.setText(J2.nombreDesintegrateurs+"");
+
+
+
+    }
+
+
     private void btn_col_0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_col_0ActionPerformed
         // TODO add your handling code here:
         joueurDansColonne(0);
-       joueurSuivant ();
+        joueurSuivant();
     }//GEN-LAST:event_btn_col_0ActionPerformed
 
     private void btn_col_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_col_1ActionPerformed
         // TODO add your handling code here:
         joueurDansColonne(1);
-        joueurSuivant ();
+        joueurSuivant();
     }//GEN-LAST:event_btn_col_1ActionPerformed
 
     private void btn_col_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_col_2ActionPerformed
         // TODO add your handling code here:
         joueurDansColonne(2);
-        joueurSuivant ();
+        joueurSuivant();
     }//GEN-LAST:event_btn_col_2ActionPerformed
 
     private void btn_col_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_col_3ActionPerformed
         // TODO add your handling code here:
         joueurDansColonne(3);
-        joueurSuivant ();
+        joueurSuivant();
     }//GEN-LAST:event_btn_col_3ActionPerformed
 
     private void btn_col_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_col_4ActionPerformed
         // TODO add your handling code here:
         joueurDansColonne(4);
-        joueurSuivant ();
+        joueurSuivant();
     }//GEN-LAST:event_btn_col_4ActionPerformed
 
     private void btn_col_5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_col_5ActionPerformed
         // TODO add your handling code here:
         joueurDansColonne(5);
-        joueurSuivant ();
+        joueurSuivant();
     }//GEN-LAST:event_btn_col_5ActionPerformed
 
     private void btn_col_6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_col_6ActionPerformed
         // TODO add your handling code here:
         joueurDansColonne(6);
-        joueurSuivant ();
+        joueurSuivant();
     }//GEN-LAST:event_btn_col_6ActionPerformed
-    public boolean joueurDansColonne(int indice_colonne){
+    public boolean joueurDansColonne(int indice_colonne) {
         return true;
     }
-    public void joueurSuivant(){
-        if (joueurCourant== listeJoueurs[0]){
-            joueurCourant =listeJoueurs[1];            
+
+    public void joueurSuivant() {
+        if (joueurCourant == listeJoueurs[0]) {
+            joueurCourant = listeJoueurs[1];
+        } else {
+            joueurCourant = listeJoueurs[0];
         }
-        else joueurCourant =listeJoueurs[0];
-        lbl_jcourant.setText(joueurCourant.Nom);
+        lbl_jcourant.setText(joueurCourant.nom);
     }
+
     /**
      * @param args the command line arguments
      */
