@@ -346,21 +346,35 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         Joueur J1 = new Joueur(nomJoueur1);
         String nomJoueur2 = nom_joueur2.getText();
         Joueur J2 = new Joueur(nomJoueur2);
+
+        listeJoueurs[0] = J1;
+        listeJoueurs[1] = J2;
+        lbl_j1_nom.setText(nomJoueur1);
+        lbl_j2_nom.setText(nomJoueur2);
+        lbl_j1_desint.setText(J1.nombreDesintegrateurs + "");
+        lbl_j2_desint.setText(J2.nombreDesintegrateurs + "");
+        Random r = new Random();
+        boolean le_premier = r.nextBoolean();
+        if (le_premier) {
+            joueurCourant = listeJoueurs[0];
+        } else {
+            joueurCourant = listeJoueurs[1];
+        }
+
         attribuerCouleurAuxJoueurs();
-        System.out.println(J1.nom+"est de couleur"+J1.couleur);
-        System.out.println(J2.nom+"est de couleur"+J2.couleur);
+        /*System.out.println(J1.nom+"est de couleur"+J1.couleur);
+        System.out.println(J2.nom+"est de couleur"+J2.couleur);*/
         creerEtAffecterJeton(listeJoueurs[0]);
         creerEtAffecterJeton(listeJoueurs[1]);
         this.placerTrousNoirsEtDesintegrateurs();
-        lbl_j1_nom.setText(nomJoueur1);
-        lbl_j2_nom.setText(nomJoueur2);
+
         lbl_j1_couleur.setText(J1.couleur);
         lbl_j2_couleur.setText(J2.couleur);
-        lbl_jcourant.setText(joueurCourant.nom);
-        lbl_j1_desint.setText(J1.nombreDesintegrateurs+"");
-        lbl_j2_desint.setText(J2.nombreDesintegrateurs+"");
 
-
+        for (int i = 0; i < 30; i++) {
+            J1.ajouterJeton(new Jeton(J1.couleur));
+            J2.ajouterJeton(new Jeton(J2.couleur));
+        }
 
     }
 
@@ -407,7 +421,32 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         joueurSuivant();
     }//GEN-LAST:event_btn_col_6ActionPerformed
     public boolean joueurDansColonne(int indice_colonne) {
-        return true;
+        /*boolean resultatAction;
+
+        int colonne = sc.nextInt() - 1;
+
+        while (colonne > 6 || colonne < 0) {
+
+            System.out.println("Erreur : veuillez saisir une colonne :");
+
+            colonne = sc.nextInt() - 1;
+
+            resultatAction = CelluleDeGrille.ajouterJetonDansColonne(joueurCourant, colonne);
+
+            while (!resultatAction) {
+
+                System.out.println("La collone est pleine veuillez saisir une autre colonne :");
+
+                colonne = sc.nextInt() - 1;
+
+                resultatAction =CelluleDeGrille.ajouterJetonDansColonne(joueurCourant, colonne);
+                return true;
+            }
+        }
+        */
+        return false;
+    
+        
     }
 
     public void joueurSuivant() {
