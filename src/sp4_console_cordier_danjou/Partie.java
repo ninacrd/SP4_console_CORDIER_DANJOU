@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class Partie {
 
     private Joueur[] listeJoueurs = new Joueur[2];
-    private Joueur jc;
+    private Joueur joueurCourant;
     private PlateauDeJeu plateau;
     PlateauDeJeu grille_jeu = new PlateauDeJeu();
 
@@ -23,7 +23,6 @@ public class Partie {
         listeJoueurs[0] = J1;
         listeJoueurs[1] = J2;
         this.plateau = new PlateauDeJeu();
-
     }
 
     public void attribuerCouleurAuxJoueurs() {
@@ -40,12 +39,14 @@ public class Partie {
     }
     public void creerEtAffecterJeton( Joueur jr){
         Jeton []jetons = new Jeton[30];
-        for (int i=0 ; i<=30;i++){
+        for (int i=0 ; i<30;i++){
         jetons[i]=new Jeton (jr.couleur);
         jr.ajouterJeton(jetons[i]);
+
     }
     }
-    public void placerTrousNoirsEtDesintegrateurs(){
+    
+public void placerTrousNoirsEtDesintegrateurs(){
         Random lgn= new Random();
         Random cln= new Random();
         for(int i=0; i<3;i++){
@@ -63,7 +64,6 @@ public class Partie {
      for (int j = 0; j < 2; j++) {
 
             int Ligne = lgn.nextInt(6);
-
             int Colonne = cln.nextInt(7);
 
             if (plateau.presenceDesintegrateur(Ligne, Colonne) == false) {
@@ -100,7 +100,6 @@ public class Partie {
         attribuerCouleurAuxJoueurs();
         creerEtAffecterJeton(listeJoueurs[0]);
         creerEtAffecterJeton(listeJoueurs[1]);
-        placerTrousNoirsEtDesintegrateurs();
     }
 
     public void LancerPartie(){
@@ -120,6 +119,8 @@ public class Partie {
         listeJoueurs[1].Joueur(nom_j2);
        
         /*on récupère le nom et la couleur affectée aux joueurs*/
+        placerTrousNoirsEtDesintegrateurs();
+        grille_jeu.afficherGrilleSurConsole();
         System.out.println(listeJoueurs[0].nom + " est de couleur " + listeJoueurs[0].couleur);
         System.out.println(listeJoueurs[1].nom + " est de couleur " + listeJoueurs[1].couleur);
 
@@ -134,34 +135,26 @@ public class Partie {
         
         String couleur_jeton = joueurCourant.affecterCouleur();
 
-        /*on créé une méthode qui déterminera le joueur suivant*/
-        while(true){
-            if(nombre_joué % 2 == 0){/*si on en a joué 1 : on joue, ensuite on aura = 0 donc ce sera à l'autre et ainsi de suite*/
-                joueurCourant = listeJoueurs[0];
-            } else {
-                joueurCourant = listeJoueurs[1];
-            }
        
+
         boolean victoire = false; /*au départ personne n'a gagné*/
         while (victoire != true){ /*tant que personne n'a eu 4 jetons alignés on continu de jouer donc la boucle continue de s'exécuter*/
             System.out.println("C'est à " + joueurCourant.nom + " de jouer");
+            plateau.afficherGrilleSurConsole();
             
         /* création d'un menu avec plusieurs choix possible*/
             System.out.println(joueurCourant.nom + ", que voulez vous faire?");
-            System.out.println("1 - jouer un jeton");
+            System.out.println("1 - Jouer un jeton");
             System.out.println("2 - Récupérer un jeton");
             System.out.println("3 - Désintegrer un jeton adverse");
             System.out.println("Veuillez entrer le chiffre correspondant à l'action voulue :");
             choix_joueur = saisie_joueur.nextInt();            
+
             while (choix_joueur <= 0 || choix_joueur > 3) { /* si l'utilisateur se trompe et ne met pas un nombre entre 1 et 3*/
                 System.out.println("veuillez entrer un chiffre compris entre 1 - 3 correspondant a l'action voulue");
                 choix_joueur = saisie_joueur.nextInt(); 
             }
-            choix_joueur = saisie_joueur.nextInt();
             
-            switch (choix_joueur){
-            
-                case 1 : {
                     if (choix_joueur == 1){ /*s'il choisi 1 il veut placer un jeton*/
                     if (joueurCourant.nombreDeJetons() == 0){/*on vérifie que le joueur possede assez de jetons pour jouer*/
                         System.out.println("Vous n'avez plus de jeton donc vous ne pouvez pas jouer");
@@ -187,10 +180,16 @@ public class Partie {
                     }
                     nombre_joué ++;
                     victoire = plateau.etreGagnantePourCouleur(couleur_jeton);/*on regarde si le joueur a aligné 4 jetons*/
+                    
+                    
+                if (joueurCourant == listeJoueurs[0]) {
+                    joueurCourant = listeJoueurs[1];
                 }
+                else if (joueurCourant == listeJoueurs[1]) {
+                    joueurCourant = listeJoueurs[0];
+                }     
                 }
-        break;
-        case 2 :  {
+                
             if (choix_joueur == 2){/*s'il choisi 2 il veut retirer un jeton*/
                 System.out.println("Quelle est la colonne du jeton à retirer ?");
                 int colonne_jr = saisie_joueur.nextInt(); /*on demande la colonne du jeton à retirer*/
@@ -211,11 +210,15 @@ public class Partie {
                 }
                 nombre_joué ++;
                 victoire = plateau.etreGagnantePourCouleur(couleur_jeton);
+                
+                
+                if (joueurCourant == listeJoueurs[0]) {
+                    joueurCourant = listeJoueurs[1];
+                }
+                else if (joueurCourant == listeJoueurs[1]) {
+                    joueurCourant = listeJoueurs[0];
+                }
             }
-        }
-        break;
-        case 3: {
-        
         
             if(choix_joueur==3){
                 System.out.println("Dans quelle colonne est le jeton que vous voulez desintégrer ?");
@@ -232,20 +235,18 @@ public class Partie {
                     }
                 joueurCourant.utiliserDesintegrateur();
                 victoire = plateau.etreGagnantePourCouleur(couleur_jeton);
+                
+                
+                
+                if (joueurCourant == listeJoueurs[0]) {
+                    joueurCourant = listeJoueurs[1];
+                }
+                else if (joueurCourant == listeJoueurs[1]) {
+                    joueurCourant = listeJoueurs[0];
+                }
             }
         }
         String Gagnant = joueurCourant.afficher_nom_gagnant();
         System.out.println(Gagnant +" a gagné");
     }
     }  
-        break;
-
-        }
-    }
-}
-
-    
-    
-    
-
-

@@ -46,10 +46,11 @@ public class Joueur {
     public void  ajouterJeton(Jeton ajout){
         reserveJetons.add(ajout);
     }
+    
 
     public Jeton jouerJeton(){
         int m = nombreDeJetons();
-        Jeton jt = reserveJetons.remove(m);
+        Jeton jt = reserveJetons.remove(0);
         return jt;
     }
     

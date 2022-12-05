@@ -50,8 +50,9 @@ public class PlateauDeJeu {
     public void afficherGrilleSurConsole(){ /*on affiche la grille sur la console*/
         for (int i=5;i>=0;i--){
             for (int j=0;j<7;j++){
-                grille[i][j].toString();
-            }
+                System.out.print(grille[i][j]);
+             }
+            System.out.println();
         }
     }
     
@@ -82,8 +83,8 @@ public class PlateauDeJeu {
         int i;
         int j;
         for (i=0; i<3; i++){ /*l'indice de la ligne jeton ne peut dépasser 2*/
-            for (j=0; j<7; i++){ /*l'indice de la colonne va de 0 à 6*/
-                if (C==grille[i][j].lireCouleurDuJeton() && C==grille[i][j+1].lireCouleurDuJeton() && C==grille[i][j+2].lireCouleurDuJeton() && C==grille[i][j+3].lireCouleurDuJeton()){
+            for (j=0; j<7; j++){ /*l'indice de la colonne va de 0 à 6*/
+                if (C==grille[i][j].lireCouleurDuJeton() && C==grille[i+1][j].lireCouleurDuJeton() && C==grille[i+2][j].lireCouleurDuJeton() && C==grille[i+3][j].lireCouleurDuJeton()){
                     return true;
                 }
             }
@@ -186,6 +187,3 @@ public class PlateauDeJeu {
         return recup;
     }
 }
-
-
-

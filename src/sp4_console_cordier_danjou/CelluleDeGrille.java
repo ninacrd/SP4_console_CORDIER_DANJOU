@@ -111,14 +111,13 @@ public class CelluleDeGrille {
             chaine_a_retourner = "@";
         }
         
-        if (avoirDesintegrateur == true){
+        else if (avoirDesintegrateur == true){
             chaine_a_retourner = "D";
         }
         
             return chaine_a_retourner;
         }
 }      
-    
     
     
 
