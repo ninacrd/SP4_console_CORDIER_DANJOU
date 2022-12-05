@@ -149,7 +149,7 @@ public class Partie {
             System.out.println(joueurCourant.nom + ", que voulez vous faire?");
             System.out.println("1 - jouer un jeton");
             System.out.println("2 - Récupérer un jeton");
-            System.out.println("3 - Désintegration d'un jeton adverse");
+            System.out.println("3 - Désintegrer un jeton adverse");
             System.out.println("Veuillez entrer le chiffre correspondant à l'action voulue :");
             choix_joueur = saisie_joueur.nextInt();            
             while (choix_joueur <= 0 || choix_joueur > 3) { /* si l'utilisateur se trompe et ne met pas un nombre entre 1 et 3*/
