@@ -58,11 +58,17 @@ public class Joueur {
         nombreDesintegrateurs += 1;
     }
     
-    public void utiliserDesintegrateur(){
-        nombreDesintegrateurs -= 1;
+    public boolean utiliserDesintegrateur() {
+        if (nombreDesintegrateurs > 0) {
+            nombreDesintegrateurs -= 1;
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
-    boolean ajouterJetonDansColonne(Jeton un_jeton) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int getNombreDesintegrateurs() {
+        return nombreDesintegrateurs;
     }
 }

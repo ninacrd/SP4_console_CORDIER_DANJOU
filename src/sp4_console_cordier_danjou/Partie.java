@@ -168,17 +168,17 @@ public void placerTrousNoirsEtDesintegrateurs(){
                             System.out.println("Cette colonne est pleine, choisissez en une autre");
                         } 
                         else {/*cas où la colonne n'est pas remplie : on peut jouer*/
-                            plateau.ajouterJetonDansColonne(jeton_joué,colonne);
-                            for(int j=0; j<7 ; j++){/*s'il y a un trou noir, on le retire ainsi que le jeton*/
-                                boolean a = plateau.presenceTrouNoir(colonne,j);
-                                if(a==true){
-                                    plateau.supprimerTrouNoir(colonne,j);
-                                    plateau.supprimerJeton(colonne,j);
-                                }
+                            int ligne = plateau.ajouterJetonDansColonne(jeton_joué,colonne);
+                            if (plateau.presenceTrouNoir(ligne, colonne)){                       
+                                plateau.supprimerTrouNoir(ligne,colonne);
+                                plateau.supprimerJeton(ligne, colonne);
                             }
+                            if (plateau.presenceDesintegrateur(ligne, colonne)){                       
+                                plateau.supprimerDesintegrateur(ligne,colonne);
+                                joueurCourant.obtenirDesintegrateur();                            }
+                            
                         }
                     }
-                    nombre_joué ++;
                     victoire = plateau.etreGagnantePourCouleur(couleur_jeton);/*on regarde si le joueur a aligné 4 jetons*/
                     
                     
@@ -191,26 +191,27 @@ public void placerTrousNoirsEtDesintegrateurs(){
                 }
                 
             if (choix_joueur == 2){/*s'il choisi 2 il veut retirer un jeton*/
-                System.out.println("Quelle est la colonne du jeton à retirer ?");
-                int colonne_jr = saisie_joueur.nextInt(); /*on demande la colonne du jeton à retirer*/
-                System.out.println("Quelle est la ligne du jeton à retirer ?");
-                int ligne_jr = saisie_joueur.nextInt(); /*on demande la ligne du jeton à retirer*/
-                boolean presence = plateau.presenceJeton(colonne_jr,ligne_jr); /*on vérifie qu'il y a bien un jeton à cet emplacement*/
-                String clr_j = joueurCourant.affecterCouleur();
-                String clr_jj = plateau.lireCouleurDuJeton(colonne_jr,ligne_jr);
-
-
-
-                if(presence == true & clr_j == clr_jj){//on vérifie qu'il y ai un jeton à l'endroit indiqué et qu'il soit bien de la même couleur que le jeton courant*/
-                    plateau.recupererJeton(colonne_jr,ligne_jr);
-                    plateau.tasserColonne(colonne_jr);/*on retire le jeton donc on descend tous les jetons de la colonne d'un cran*/
-                }
-                else if (presence == false || clr_j != clr_jj) {
-                    System.out.println("Il n'y a pas de jeton à retirer à l'endroit indiqué ou ce jeton c'est pas le votre");
-                }
-                nombre_joué ++;
-                victoire = plateau.etreGagnantePourCouleur(couleur_jeton);
                 
+               System.out.println("Dans quelle colonne est le jeton que vous voulez retirer ?");
+            int colonne_r = saisie_joueur.nextInt();                      //on demande la ligne et colonne du jeton 
+            System.out.println("Dans quelle ligne est le jeton que vous voulez retirer ?");
+            int ligne_r = saisie_joueur.nextInt();
+            boolean presence=plateau.presenceJeton(colonne_r, ligne_r);//on vérifie qu'il y a bien un jeton à retirer
+            String clr_j=joueurCourant.affecterCouleur();
+            String clr_jt=plateau.lireCouleurDuJeton(colonne_r, ligne_r);
+            if(presence==true & clr_j==clr_jt){//on vérifie s'il y en a un et s'il est de la couleur du joueur courant
+                plateau.recupererJeton(colonne_r, ligne_r);
+                plateau.tasserColonne(colonne_r);
+            }
+            else{
+                System.out.println("il n'y a pas de jeton à retirer ou ce jeton ne vous appartient pas");
+            }
+
+            String clr=joueurCourant.affecterCouleur();
+            victoire = plateau.etreGagnantePourCouleur(clr);
+
+        
+ 
                 
                 if (joueurCourant == listeJoueurs[0]) {
                     joueurCourant = listeJoueurs[1];
@@ -222,30 +223,27 @@ public void placerTrousNoirsEtDesintegrateurs(){
         
             if(choix_joueur==3){
                 System.out.println("Dans quelle colonne est le jeton que vous voulez desintégrer ?");
-                int colonne_d = saisie_joueur.nextInt();
-                System.out.println("Dans quelle ligne est le jeton que vous voulez desintégrer ?");
-                int ligne_d = saisie_joueur.nextInt();
-                boolean presence = plateau.presenceJeton(colonne_d,ligne_d);
-            
-                if(presence==true){
-                    plateau.supprimerJeton(colonne_d, ligne_d);
-                    plateau.tasserColonne(colonne_d);/*on a retiré le jeton donc on descend tous les jetons de la colonne d'un cran*/
-                }   else {
-                        System.out.println("Il n'y a pas de jeton à desintégrer à l'endroit indiqué");
-                    }
-                joueurCourant.utiliserDesintegrateur();
-                victoire = plateau.etreGagnantePourCouleur(couleur_jeton);
-                
-                
-                
-                if (joueurCourant == listeJoueurs[0]) {
-                    joueurCourant = listeJoueurs[1];
-                }
-                else if (joueurCourant == listeJoueurs[1]) {
-                    joueurCourant = listeJoueurs[0];
-                }
+            int colonne_r = saisie_joueur.nextInt();
+            System.out.println("Dans quelle ligne est le jeton que vous voulez desintégrer ?");
+            int ligne_r = saisie_joueur.nextInt();
+            boolean presence=plateau.presenceJeton(colonne_r, ligne_r);
+
+            if(presence==true){
+                plateau.supprimerJeton(colonne_r, ligne_r);
+                plateau.tasserColonne(colonne_r);
+            }
+            else{
+                System.out.println("il n'y a pas de jeton à desintégrer");
+            }
+            joueurCourant.utiliserDesintegrateur();
+
+            String clr=joueurCourant.affecterCouleur();
+            victoire = plateau.etreGagnantePourCouleur(clr);
+
             }
         }
+            
+        
         String Gagnant = joueurCourant.afficher_nom_gagnant();
         System.out.println(Gagnant +" a gagné");
     }
