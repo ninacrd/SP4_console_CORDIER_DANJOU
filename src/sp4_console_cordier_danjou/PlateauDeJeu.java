@@ -39,7 +39,7 @@ public class PlateauDeJeu {
         return true;
     }
     
-    public void viderGrille(Joueur joueur1, Joueur joueur2){ //vide les jetons de la grille
+    public void viderGrille(){ //vide les jetons de la grille
         for (int i=0;i<6;i++){
             for (int j=0;j<7;j++){
                 grille[i][j].jetonCourant=null; /*chaque cellule est vidée*/
@@ -55,12 +55,14 @@ public class PlateauDeJeu {
         }
     }
     
-    public void presenceJeton(int x,int y){
-        grille[x][y].presenceJeton(); /*retourne la valeur de cette méthode aux coordonnées [x][y}*/
+    public boolean presenceJeton(int x,int y){
+        boolean a = grille[x][y].presenceJeton(); /*retourne la valeur de cette méthode aux coordonnées [x][y}*/
+        return a;
     }
     
-    public void lireCouleurDuJeton(int x, int y){
-        grille[x][y].lireCouleurDuJeton(); /*meme méthode*/
+    public String lireCouleurDuJeton(int x, int y){/*changement de void ) String pour enlever l'erreur dans partie*/
+        String a = grille[x][y].lireCouleurDuJeton(); /*meme méthode*/
+        return a;
     }
     
     public boolean ligneGagnantePourCouleur(String C){ /*test si la ligne est gagnante*/

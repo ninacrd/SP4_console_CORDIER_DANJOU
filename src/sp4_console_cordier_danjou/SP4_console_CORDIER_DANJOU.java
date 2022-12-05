@@ -13,12 +13,17 @@ public class SP4_console_CORDIER_DANJOU {
     /**
      * @param args the command line arguments
      */
-    public static void fmain(String[] args) {
+    public static void main(String[] args) {
         // TODO code application logic here
-        Jeton jeton1 = new Jeton ("jaune");
-        System.out.println(jeton1);
+        Joueur J1 = new Joueur("Nina");
+        Joueur J2 = new Joueur("Matthieu");
         
-        CelluleDeGrille[][] grille = new CelluleDeGrille[6][7];
+        Partie Partie = new Partie();   
+
+        Partie.initialiserPartie();
+
+        Partie.grille_jeu.afficherGrilleSurConsole();
+        Partie.LancerPartie();
 
     }
     
