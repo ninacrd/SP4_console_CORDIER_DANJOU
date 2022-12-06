@@ -12,7 +12,7 @@ import java.util.Scanner;
  *
  * @author Utilisateur
  */
-public class Partie { 
+public class Partie {
 
     private Joueur[] listeJoueurs = new Joueur[2];
     private Joueur joueurCourant;
@@ -166,6 +166,12 @@ public class Partie {
                         System.out.println("Cette colonne est pleine, choisissez en une autre");
                     } else {/*cas où la colonne n'est pas remplie : on peut jouer*/
                         int ligne = plateau.ajouterJetonDansColonne(jeton_joué, colonne);
+                        if(plateau.presenceTrouNoir(ligne, colonne)==true&&plateau.presenceDesintegrateur(ligne, colonne)==true){
+                            plateau.supprimerTrouNoir(ligne, colonne);
+                            plateau.supprimerDesintegrateur(ligne,colonne);
+                            joueurCourant.obtenirDesintegrateur();
+                            plateau.supprimerJeton(ligne, colonne);
+                        }
                         if (plateau.presenceTrouNoir(ligne, colonne)) {
                             plateau.supprimerTrouNoir(ligne, colonne);
                             plateau.supprimerJeton(ligne, colonne);
@@ -184,7 +190,7 @@ public class Partie {
 
                 System.out.println("Dans quelle colonne est le jeton que vous voulez retirer ?");
                 int colonne = saisie_joueur.nextInt();                      //on demande la ligne et colonne du jeton 
-                System.out.println("Dans quelle liNINAgne est le jeton que vous voulez retirer ?");
+                System.out.println("Dans quelle ligne est le jeton que vous voulez retirer ?");
                 int ligne = saisie_joueur.nextInt();
                 boolean presence = plateau.presenceJeton(ligne, colonne);//on vérifie qu'il y a bien un jeton à retirer
                 String clr_j = joueurCourant.affecterCouleur();
@@ -216,7 +222,6 @@ public class Partie {
                             }
                         } else {
                             System.out.println("il n'y a pas de jeton à desintégrer");
-
                         }
                     } else {
                         if (plateau.presenceJeton(ligne, colonne) == true) {/*on regarde qu'il y ai bien un jeton*/
@@ -226,7 +231,8 @@ public class Partie {
                             } else {
                                 System.out.println("C'est votre jeton");
                             }
-                            System.out.println("il n'y a pas de jeton à desintégrer");
+                        } else {
+                            System.out.println("il n'y a pas de jeton à desintégrer"); 
                         }
                     }
                 } else {
