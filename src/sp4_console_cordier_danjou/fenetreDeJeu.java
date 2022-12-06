@@ -370,6 +370,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
 
         lbl_j1_couleur.setText(J1.couleur);
         lbl_j2_couleur.setText(J2.couleur);
+        lbl_jcourant.setText(joueurCourant.nom);
 
         for (int i = 0; i < 30; i++) {
             J1.ajouterJeton(new Jeton(J1.couleur));
@@ -421,29 +422,34 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         joueurSuivant();
     }//GEN-LAST:event_btn_col_6ActionPerformed
     public boolean joueurDansColonne(int indice_colonne) {
-        /*boolean resultatAction;
-
-        int colonne = sc.nextInt() - 1;
-
-        while (colonne > 6 || colonne < 0) {
-
-            System.out.println("Erreur : veuillez saisir une colonne :");
-
-            colonne = sc.nextInt() - 1;
-
-            resultatAction = CelluleDeGrille.ajouterJetonDansColonne(joueurCourant, colonne);
-
-            while (!resultatAction) {
-
-                System.out.println("La collone est pleine veuillez saisir une autre colonne :");
-
-                colonne = sc.nextInt() - 1;
-
-                resultatAction =CelluleDeGrille.ajouterJetonDansColonne(joueurCourant, colonne);
-                return true;
-            }
-        }
-        */
+        int colonne = indice_colonne;
+        panneau_grille.repaint();
+        
+         if (joueurCourant.nombreDeJetons() == 0){/*on vérifie que le joueur possede assez de jetons pour jouer*/
+                        System.out.println("Vous n'avez plus de jeton donc vous ne pouvez pas jouer");
+                    }
+                    else {
+                        System.out.println("Où souhaitez vous jouer ?");
+                        
+                        Jeton jeton_joué = joueurCourant.jouerJeton();/*on crée le jeton qui va être joué et le retire de ceux que le joueur possède*/                
+                        boolean cr = plateau.colonneRemplie(colonne);/*on vérifie que la colonne n'est pas remplie*/
+                        if(cr == true){/*si la colonne est remplie on ne peut plus placer de pion*/
+                            System.out.println("Cette colonne est pleine, choisissez en une autre");
+                        } 
+                        else {/*cas où la colonne n'est pas remplie : on peut jouer*/
+                            plateau.ajouterJetonDansColonne(jeton_joué,colonne);
+                            for(int j=0; j<7 ; j++){/*s'il y a un trou noir, on le retire ainsi que le jeton*/
+                                boolean a = plateau.presenceTrouNoir(colonne,j);
+                                if(a==true){
+                                    plateau.supprimerTrouNoir(colonne,j);
+                                    plateau.supprimerJeton(colonne,j);
+                                }
+                                return false;
+                             }
+                            return true;
+                        }
+                    }
+        
         return false;
     
         
@@ -455,7 +461,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         } else {
             joueurCourant = listeJoueurs[0];
         }
-        lbl_jcourant.setText(joueurCourant.nom);
+        
     }
 
     /**

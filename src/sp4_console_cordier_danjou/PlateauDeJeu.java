@@ -28,6 +28,7 @@ public class PlateauDeJeu {
             }
         }
         return -1; /*retourne -1 si la colonne est pleine*/
+        
     }
     
     public boolean grilleRemplie(){
