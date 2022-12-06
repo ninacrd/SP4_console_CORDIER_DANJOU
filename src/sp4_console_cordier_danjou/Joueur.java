@@ -11,22 +11,24 @@ import java.util.ArrayList;
  * @author Utilisateur
  */
 public class Joueur {
-    String nom;
-    String couleur;
-    private ArrayList <Jeton> reserveJetons = new ArrayList<Jeton>();
+    public String nom;
+    public String couleur;
+    private ArrayList <Jeton> reserveJetons = new ArrayList();
     public int nombreDesintegrateurs;
     
 
     public void Joueur (String un_nom){
         nom = un_nom;
-        nombreDesintegrateurs = 0;
     }
     
     public Joueur (String un_nom){
         nom = un_nom;
+    }    
+    public void affecterNom (String un_nom){
+        nom = un_nom;
     }
     
-    public String afficher_nom_gagnant(){
+    public String getNom(){
         return nom;
     }
     
@@ -58,11 +60,18 @@ public class Joueur {
         nombreDesintegrateurs += 1;
     }
     
-    public void utiliserDesintegrateur(){
-        nombreDesintegrateurs -= 1;
-    }
+    public boolean utiliserDesintegrateur() {
+        if (nombreDesintegrateurs > 0) {
+            nombreDesintegrateurs -= 1;
+            return true;
+        }
+        else {
+            return false;
+        }
+}
 
-    boolean ajouterJetonDansColonne(Jeton un_jeton) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int getNombreDesintegrateurs() {
+        return nombreDesintegrateurs;
     }
+    
 }

@@ -15,10 +15,8 @@ public class CelluleDeGrille {
     private boolean avoirTrouNoir;
     private boolean avoirDesintegrateur;
 
-    public CelluleDeGrille() {/*initialisation de l'attribut*/
+    public void CelluleDeGrille() {/*initialisation de l'attribut*/
         jetonCourant = null;
-        avoirTrouNoir = false;
-        avoirDesintegrateur = false;
     }
 
     public boolean presenceJeton() {
@@ -39,7 +37,13 @@ public class CelluleDeGrille {
         if (jetonCourant == null) {
             return "vide";
         } else {
-            return jetonCourant.lireCouleur();
+            String var;
+            var = jetonCourant.lireCouleur();
+            if (var == "rouge"){
+                return ("rouge");
+            } else {
+                return ("jaune");
+            }
         }
     }
 
@@ -92,10 +96,10 @@ public class CelluleDeGrille {
     
 @Override
         public String toString() { 
-        String clr=lireCouleurDuJeton();
+        String clr = lireCouleurDuJeton();
         String chaine_a_retourner;
         
-        chaine_a_retourner ="erreur";
+        chaine_a_retourner = "erreur";
         if (jetonCourant==null && avoirTrouNoir == false && avoirDesintegrateur == false){
             chaine_a_retourner=".";
             
@@ -120,9 +124,5 @@ public class CelluleDeGrille {
 }      
     
     
-
-
-
-   
-       
+    
 

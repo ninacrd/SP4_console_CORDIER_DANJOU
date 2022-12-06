@@ -98,7 +98,7 @@ public class PlateauDeJeu {
         int j;
         for (i=0; i<3; i++){ /*l'indice de la ligne ne peut dépasser 2*/
             for (j=0; i<4; i++){ /*l'indice de la colonne ne peut dépasser 3*/
-                if (C==grille[i][j].lireCouleurDuJeton() && C==grille[i][j+1].lireCouleurDuJeton() && C==grille[i][j+2].lireCouleurDuJeton() && C==grille[i][j+3].lireCouleurDuJeton()){
+                if (C==grille[i][j].lireCouleurDuJeton() && C==grille[i+1][j+1].lireCouleurDuJeton() && C==grille[i+2][j+2].lireCouleurDuJeton() && C==grille[i+3][j+3].lireCouleurDuJeton()){
                     return true;
                 }
             }
@@ -110,8 +110,8 @@ public class PlateauDeJeu {
         int i;
         int j;
         for (i=3; i<6; i++){ 
-            for (j=0; i<4; i++){ /*l'indice de la colonne ne peut dépasser 3*/
-                if (C==grille[i][j].lireCouleurDuJeton() && C==grille[i][j+1].lireCouleurDuJeton() && C==grille[i][j+2].lireCouleurDuJeton() && C==grille[i][j+3].lireCouleurDuJeton()){
+            for (j=0; j<4; j++){ /*l'indice de la colonne ne peut dépasser 3*/
+                if (C==grille[i][j].lireCouleurDuJeton() && C==grille[i-1][j+1].lireCouleurDuJeton() && C==grille[i-2][j+2].lireCouleurDuJeton() && C==grille[i-3][j+3].lireCouleurDuJeton()){
                     return true;
                 }
             }
@@ -132,7 +132,7 @@ public class PlateauDeJeu {
     }
     
     public void tasserColonne(int j){ /*avec j la colonne*/
-        for (int i=0; i<6; i++){
+        for (int i=0; i<5; i++){
             if (i==5){ /*derniere ligne*/
                 grille[i][j].jetonCourant=null; /*si on a supprimé le jeton sur la derniere ligne, peut importe la colonne alors cette cellule sera nulle*/
             } else {
@@ -175,7 +175,7 @@ public class PlateauDeJeu {
     }
     
     public boolean presenceDesintegrateur(int i, int j){
-    boolean n=   grille[i][j].presenceDesintegrateur();
+    boolean n = grille[i][j].presenceDesintegrateur();
     return n;
     }
     
@@ -183,8 +183,11 @@ public class PlateauDeJeu {
         grille[i][j].supprimerJeton();
     }
     
-    public Jeton recupererJeton(int i, int j){
-        Jeton recup = grille[i][j].recupererJeton();
-        return recup;
+    public void recupererJeton(int i, int j){
+        grille[i][j].recupererJeton();
     }
 }
+
+
+
+

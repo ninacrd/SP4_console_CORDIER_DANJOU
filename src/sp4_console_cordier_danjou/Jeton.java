@@ -20,17 +20,28 @@ public class Jeton {
         return couleur;
     }
     
+    public String getCouleur() {  
+        if (couleur=="rouge"){
+            return "R";
+        }else return "J";        
+    }
+    
     @Override
         public String toString() { /*methode qui permet de retourner la chaine de 
         caractere que l'on veut afficher quand l'objet est cree*/
+        String chaine_a_retourner;
         if (couleur == "rouge") { /*retourne le caractèe en lien avec la couleur du jeton*/
-            return "R";
+            couleur = "R";
         }
         else if (couleur == "jaune") {
-            return "J";
+            couleur = "J";
         }
         else {
-            return "erreur";
+            couleur = "erreur";
         }
+        chaine_a_retourner = couleur;
+        return chaine_a_retourner;
+        
     }
 }
+

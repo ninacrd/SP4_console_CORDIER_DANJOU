@@ -424,44 +424,40 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     public boolean joueurDansColonne(int indice_colonne) {
         int colonne = indice_colonne;
         panneau_grille.repaint();
-        
-         if (joueurCourant.nombreDeJetons() == 0){/*on vérifie que le joueur possede assez de jetons pour jouer*/
-                        System.out.println("Vous n'avez plus de jeton donc vous ne pouvez pas jouer");
-                    }
-                    else {
-                        System.out.println("Où souhaitez vous jouer ?");
-                        
-                        Jeton jeton_joué = joueurCourant.jouerJeton();/*on crée le jeton qui va être joué et le retire de ceux que le joueur possède*/                
-                        boolean cr = plateau.colonneRemplie(colonne);/*on vérifie que la colonne n'est pas remplie*/
-                        if(cr == true){/*si la colonne est remplie on ne peut plus placer de pion*/
-                            System.out.println("Cette colonne est pleine, choisissez en une autre");
-                        } 
-                        else {/*cas où la colonne n'est pas remplie : on peut jouer*/
-                            plateau.ajouterJetonDansColonne(jeton_joué,colonne);
-                            for(int j=0; j<7 ; j++){/*s'il y a un trou noir, on le retire ainsi que le jeton*/
-                                boolean a = plateau.presenceTrouNoir(colonne,j);
-                                if(a==true){
-                                    plateau.supprimerTrouNoir(colonne,j);
-                                    plateau.supprimerJeton(colonne,j);
-                                }
-                                return false;
-                             }
-                            return true;
-                        }
-                    }
-        
-        return false;
-    
-        
+
+        if (joueurCourant.nombreDeJetons() == 0) {/*on vérifie que le joueur possede assez de jetons pour jouer*/
+
+        } else {
+            Jeton jeton_joué = joueurCourant.jouerJeton();/*on crée le jeton qui va être joué et le retire de ceux que le joueur possède*/
+            boolean cr = plateau.colonneRemplie(colonne);/*on vérifie que la colonne n'est pas remplie*/
+            int lig = 0;
+
+            if (cr == false) {/*si la colonne est remplie on ne peut plus placer de pion*/
+                lig = plateau.ajouterJetonDansColonne(jeton_joué, indice_colonne);
+
+                boolean a = plateau.presenceTrouNoir(lig, indice_colonne);
+                if (a == true) {
+                    plateau.supprimerTrouNoir(lig, indice_colonne);
+                    plateau.supprimerJeton(lig, indice_colonne);
+                }
+                return true;
+            }
+
+        }
+
+        return true;
     }
 
-    public void joueurSuivant() {
+
+
+public void joueurSuivant() {
         if (joueurCourant == listeJoueurs[0]) {
             joueurCourant = listeJoueurs[1];
         } else {
             joueurCourant = listeJoueurs[0];
         }
-        
+        lbl_jcourant.setText(joueurCourant.getNom());
+
     }
 
     /**
@@ -478,16 +474,28 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(fenetreDeJeu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(fenetreDeJeu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(fenetreDeJeu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(fenetreDeJeu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fenetreDeJeu.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(fenetreDeJeu.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(fenetreDeJeu.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(fenetreDeJeu.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
