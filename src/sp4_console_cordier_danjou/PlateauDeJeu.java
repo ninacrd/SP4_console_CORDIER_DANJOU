@@ -109,7 +109,7 @@ public class PlateauDeJeu {
         int i;
         int j;
         for (i=3; i<6; i++){ 
-            for (j=0; i<4; i++){ /*l'indice de la colonne ne peut dépasser 3*/
+            for (j=0; j<4; j++){ /*l'indice de la colonne ne peut dépasser 3*/
                 if (C==grille[i][j].lireCouleurDuJeton() && C==grille[i-1][j+1].lireCouleurDuJeton() && C==grille[i-2][j+2].lireCouleurDuJeton() && C==grille[i-3][j+3].lireCouleurDuJeton()){
                     return true;
                 }
