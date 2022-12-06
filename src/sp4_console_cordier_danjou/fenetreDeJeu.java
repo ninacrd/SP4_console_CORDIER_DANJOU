@@ -383,48 +383,60 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     private void btn_col_0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_col_0ActionPerformed
         // TODO add your handling code here:
         joueurDansColonne(0);
+        if (plateau.colonneRemplie(0)==true)btn_col_0.setEnabled(false);
         joueurSuivant();
     }//GEN-LAST:event_btn_col_0ActionPerformed
 
     private void btn_col_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_col_1ActionPerformed
         // TODO add your handling code here:
         joueurDansColonne(1);
+        if (plateau.colonneRemplie(1)==true)btn_col_1.setEnabled(false);
         joueurSuivant();
     }//GEN-LAST:event_btn_col_1ActionPerformed
 
     private void btn_col_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_col_2ActionPerformed
         // TODO add your handling code here:
         joueurDansColonne(2);
+        if (plateau.colonneRemplie(2)==true)btn_col_2.setEnabled(false);
         joueurSuivant();
     }//GEN-LAST:event_btn_col_2ActionPerformed
 
     private void btn_col_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_col_3ActionPerformed
         // TODO add your handling code here:
         joueurDansColonne(3);
+        if (plateau.colonneRemplie(3)==true)btn_col_3.setEnabled(false);
         joueurSuivant();
     }//GEN-LAST:event_btn_col_3ActionPerformed
 
     private void btn_col_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_col_4ActionPerformed
         // TODO add your handling code here:
         joueurDansColonne(4);
+        if (plateau.colonneRemplie(4)==true)btn_col_4.setEnabled(false);
         joueurSuivant();
     }//GEN-LAST:event_btn_col_4ActionPerformed
 
     private void btn_col_5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_col_5ActionPerformed
         // TODO add your handling code here:
         joueurDansColonne(5);
+        if (plateau.colonneRemplie(5)==true)btn_col_5.setEnabled(false);
         joueurSuivant();
     }//GEN-LAST:event_btn_col_5ActionPerformed
 
     private void btn_col_6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_col_6ActionPerformed
         // TODO add your handling code here:
         joueurDansColonne(6);
+        if (plateau.colonneRemplie(6)==true)btn_col_6.setEnabled(false);
         joueurSuivant();
     }//GEN-LAST:event_btn_col_6ActionPerformed
     public boolean joueurDansColonne(int indice_colonne) {
         int colonne = indice_colonne;
         panneau_grille.repaint();
-
+        lbl_j1_desint.setText(listeJoueurs[0].nombreDesintegrateurs+"");
+        lbl_j2_desint.setText(listeJoueurs[1].nombreDesintegrateurs+"");
+        if ( plateau.etreGagnantePourCouleur(joueurCourant.getCouleur())){
+            message.setText("victoire de" +joueurCourant.getNom());
+            
+        }
         if (joueurCourant.nombreDeJetons() == 0) {/*on vérifie que le joueur possede assez de jetons pour jouer*/
 
         } else {
@@ -434,13 +446,24 @@ public class fenetreDeJeu extends javax.swing.JFrame {
 
             if (cr == false) {/*si la colonne est remplie on ne peut plus placer de pion*/
                 lig = plateau.ajouterJetonDansColonne(jeton_joué, indice_colonne);
+                if (plateau.presenceTrouNoir(lig, indice_colonne) == true && plateau.presenceDesintegrateur(lig, indice_colonne) == true) {
+                    plateau.supprimerTrouNoir(lig, indice_colonne);
+                    plateau.supprimerDesintegrateur(lig, indice_colonne);
+                    joueurCourant.obtenirDesintegrateur();
+                    plateau.supprimerJeton(lig, indice_colonne);
+                }
 
                 boolean a = plateau.presenceTrouNoir(lig, indice_colonne);
                 if (a == true) {
                     plateau.supprimerTrouNoir(lig, indice_colonne);
                     plateau.supprimerJeton(lig, indice_colonne);
                 }
+                if (plateau.presenceDesintegrateur(lig, indice_colonne)) {
+                    plateau.supprimerDesintegrateur(lig, indice_colonne);
+                    joueurCourant.obtenirDesintegrateur();
+                }
                 return true;
+
             }
 
         }
@@ -448,9 +471,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         return true;
     }
 
-
-
-public void joueurSuivant() {
+    public void joueurSuivant() {
         if (joueurCourant == listeJoueurs[0]) {
             joueurCourant = listeJoueurs[1];
         } else {
@@ -475,27 +496,23 @@ public void joueurSuivant() {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
 
-}
+                }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(fenetreDeJeu.class  
+            java.util.logging.Logger.getLogger(fenetreDeJeu.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(fenetreDeJeu.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(fenetreDeJeu.class  
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(fenetreDeJeu.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(fenetreDeJeu.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(fenetreDeJeu.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(fenetreDeJeu.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>

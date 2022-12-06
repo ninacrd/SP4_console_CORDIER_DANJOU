@@ -73,5 +73,11 @@ public class Joueur {
     public int getNombreDesintegrateurs() {
         return nombreDesintegrateurs;
     }
+
+    public String getCouleur() {
+        return couleur;
+    }
+    
+    
     
 }
