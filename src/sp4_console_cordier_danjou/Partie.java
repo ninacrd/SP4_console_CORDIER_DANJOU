@@ -12,7 +12,7 @@ import java.util.Scanner;
  *
  * @author Utilisateur
  */
-public class Partie {
+public class Partie { 
 
     private Joueur[] listeJoueurs = new Joueur[2];
     private Joueur joueurCourant;
