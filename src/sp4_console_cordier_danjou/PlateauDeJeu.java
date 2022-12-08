@@ -145,6 +145,12 @@ public class PlateauDeJeu {
         }
     }
     
+    public void tasserGrille(){
+        for (int i = 0; i < 7; i++){
+            tasserColonne(i);
+        }
+    }
+    
     public boolean colonneRemplie(int j){
         if (grille[5][j].presenceJeton()==false){ /*permet de savoir si une colonne est remplie si a la derniere ligne on a un jeton*/
                 return false;
