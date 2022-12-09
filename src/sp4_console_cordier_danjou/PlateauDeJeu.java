@@ -96,7 +96,7 @@ public class PlateauDeJeu {
     public boolean diagonaleMontanteGagnantePourCouleur(String C){
         int i;
         int j;
-        for (i=0; i<3; i++){ /*l'indice de la ligne ne peut dépasser 2*/
+        for (i=0; i<2; i++){ /*l'indice de la ligne ne peut dépasser 2*/
             for (j=0; i<4; i++){ /*l'indice de la colonne ne peut dépasser 3*/
                 if (C==grille[i][j].lireCouleurDuJeton() && C==grille[i+1][j+1].lireCouleurDuJeton() && C==grille[i+2][j+2].lireCouleurDuJeton() && C==grille[i+3][j+3].lireCouleurDuJeton()){
                     return true;
